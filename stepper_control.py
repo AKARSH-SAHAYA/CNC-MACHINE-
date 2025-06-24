@@ -9,18 +9,21 @@ c=Pin(22,Pin.OUT)
 d=Pin(23,Pin.OUT)
 
 
-forward_sequence = [          # full step sequences 
+# i have noticed one thing that in full step there is less torque that why it stops working when there too much friction between due to bad print quality 
+
+
+forward_sequence = [
     [1, 0, 0, 0],
+    [1, 1, 0, 0],
     [0, 1, 0, 0],
+    [0, 1, 1, 0],
     [0, 0, 1, 0],
-    [0, 0, 0, 1]
-]
-backward_sequence=[          # full step sequences 
+    [0, 0, 1, 1],
     [0, 0, 0, 1],
-    [0, 0, 1, 0],
-    [0, 1, 0, 0],
-    [1, 0, 0, 0]
+    [1, 0, 0, 1]
 ]
+# to reverse use reversed(forward_sequence)  in for loop      
+  
 
 def control(forward_sequence):
     a.value(forward_sequence[0])
