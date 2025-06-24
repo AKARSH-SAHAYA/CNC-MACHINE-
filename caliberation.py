@@ -17,18 +17,8 @@ d=Pin(23,Pin.OUT)
 number_of_test=int(input("ENTER THE NUMBER OF TIMES CALIBERATION SHOULD RUN "))
 n=number_of_test  # copy of number of test which helps to find the avg
 avg = 0.0 # to store the avg distance in 100 steps in mm 
-forward_sequence = [          # full step forward sequences 
-    [1, 0, 0, 0],
-    [0, 1, 0, 0],
-    [0, 0, 1, 0],
-    [0, 0, 0, 1]
-]
-backward_sequence=[          # full step backward  sequences 
-    [0, 0, 0, 1],
-    [0, 0, 1, 0],
-    [0, 1, 0, 0],
-    [1, 0, 0, 0]
-]
+
+
 
 def move(forward_sequence):
     a.value(forward_sequence[0])
@@ -36,20 +26,23 @@ def move(forward_sequence):
     c.value(forward_sequence[2])
     d.value(forward_sequence[3])
     time.sleep(0.01)
+forward_sequence = [
+    [1, 0, 0, 0],
+    [1, 1, 0, 0],
+    [0, 1, 0, 0],
+    [0, 1, 1, 0],
+    [0, 0, 1, 0],
+    [0, 0, 1, 1],
+    [0, 0, 0, 1],
+    [1, 0, 0, 1]
+]
 
-
-def reverse(forward_sequence):
-    a.value(forward_sequence[0])
-    b.value(forward_sequence[1])
-    c.value(forward_sequence[2])
-    d.value(forward_sequence[3])
-    time.sleep(0.01) 
 
 
 def reset():                       # to reset the system for next caliberation test 
    for test in range(25):
-       for step in backward_sequence:
-           reverse(step)
+       for step in reversed(forward_sequence):
+           move(step)
     
 while number_of_test>0:
     for test in range(25):
@@ -63,4 +56,4 @@ while number_of_test>0:
     number_of_test=number_of_test-1
 
 print("THE AVERAGE DISPLACEMENT FOR 1 STEP IS ")
-print((avg/n)/100)                   # if we dont divide it will giver the avg of 100 steps not one 
+print((avg/n)/200)                   # if we dont divide it will given the avg of 200 steps not one 25*8 = 200
