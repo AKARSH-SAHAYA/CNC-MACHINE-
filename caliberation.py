@@ -16,7 +16,7 @@ d=Pin(23,Pin.OUT)
 # taking input to know how many times caliberation has to be done 
 number_of_test=int(input("ENTER THE NUMBER OF TIMES CALIBERATION SHOULD RUN "))
 n=number_of_test  # copy of number of test which helps to find the avg
-avg = 0.0 # to store the avg distance in 100 steps in mm 
+avg = 0.0 # to store the avg distance in 200 steps in mm 
 
 
 
@@ -25,7 +25,7 @@ def move(forward_sequence):
     b.value(forward_sequence[1])
     c.value(forward_sequence[2])
     d.value(forward_sequence[3])
-    time.sleep(0.01)
+    
 forward_sequence = [
     [1, 0, 0, 0],
     [1, 1, 0, 0],
