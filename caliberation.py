@@ -25,6 +25,7 @@ def move(forward_sequence):
     b.value(forward_sequence[1])
     c.value(forward_sequence[2])
     d.value(forward_sequence[3])
+    time.sleep(0.01)
     
 forward_sequence = [
     [1, 0, 0, 0],
@@ -40,12 +41,12 @@ forward_sequence = [
 
 
 def reset():                       # to reset the system for next caliberation test 
-   for test in range(25):
+   for test in range(50):
        for step in reversed(forward_sequence):
            move(step)
     
 while number_of_test>0:
-    for test in range(25):
+    for test in range(50):
        for step in forward_sequence:
            move(step)
     print("MEASURE THE DISTANCE ")
@@ -56,4 +57,4 @@ while number_of_test>0:
     number_of_test=number_of_test-1
 
 print("THE AVERAGE DISPLACEMENT FOR 1 STEP IS ")
-print((avg/n)/200)                   # if we dont divide it will given the avg of 200 steps not one 25*8 = 200
+print((avg/n)/400)                   # if we dont divide it will given the avg of 200 steps not one 25*8 = 200
