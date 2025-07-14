@@ -46,15 +46,28 @@ with open(path, 'r') as file:
                   current_coordinates[0]=command['X']
                   current_coordinates[1]=command['Y']
              elif command['X'] is not None and command['Y'] is None and command['Z'] is None:
-                  move(xobj,conversion(abs(command['X']-current_coordinates[0])))   
-                  current_coordinates[0]=command['X']  
+                  if command['X']>0:
+                     reverse(xobj,conversion(abs(command['X']-current_coordinates[0]))) 
+                  else:
+                     move(xobj,conversion(abs(command['X']-current_coordinates[0]))) 
+                     
+                  
+                  current_coordinates[0]=command['X'] 
+
              elif command['X'] is  None and command['Y'] is not None and command['Z'] is None :
-                  move(yobj,conversion(abs(command['Y']-current_coordinates[1])))   
+                  
+                  if command['Y']>0:
+                     reverse(yobj,conversion(abs(command['Y']-current_coordinates[1]))) 
+               
+                  else:
+                     move(yobj,conversion(abs(command['Y']-current_coordinates[1])))
+                     
+                  
                   current_coordinates[1]=command['Y']  
              elif command['X'] is  None and command['Y'] is  None and command['Z'] is not None :
                   
                  if command['Z']>0:
                     pen_up()
-                 elif command['Z']<0:
+                 elif command['Z']<=0:
                     pen_down()   
 print(current_coordinates)                  
