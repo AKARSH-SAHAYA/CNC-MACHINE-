@@ -41,33 +41,41 @@ with open(path, 'r') as file:
                     break
         if command['gcommand']=='G0' or 'G00':
              # simple moving command 
-             if command['X'] is not None and command['Y'] is not None and command['Z'] is None:
-                  control_cnc(command['X']-current_coordinates[0],command['Y']-current_coordinates[1])
-                  current_coordinates[0]=command['X']
-                  current_coordinates[1]=command['Y']
-             elif command['X'] is not None and command['Y'] is None and command['Z'] is None:
-                  if command['X']>0:
-                     reverse(xobj,conversion(abs(command['X']-current_coordinates[0]))) 
+             if command['X'] is not None and command['Y'] is not None and command['Z'] is None: # X AND Y // made changes
+                  if command['X'] and command['Y'] >0:
+                   control_cnc((command['X']-current_coordinates[0]),(command['Y']-current_coordinates[1]))
+                   current_coordinates[0]=command['X']
+                   current_coordinates[1]=command['Y']
                   else:
-                     move(xobj,conversion(abs(command['X']-current_coordinates[0]))) 
-                     
-                  
-                  current_coordinates[0]=command['X'] 
+                   control_cnc(command['X'],command['Y'])
+                   current_coordinates[0]=command['X']+current_coordinates[0]
+                   current_coordinates[1]=command['Y']+current_coordinates[1]
 
-             elif command['X'] is  None and command['Y'] is not None and command['Z'] is None :
+
+             elif command['X'] is not None and command['Y'] is None and command['Z'] is None:# X AXIS
+                  if command['X']>0:
+                     reverse(xobj,conversion(abs(command['X']-current_coordinates[0])))
+                     current_coordinates[0]=command['X'] 
+                  else:
+                     move(xobj,conversion(abs(command['X']))) 
+                     current_coordinates[0]=command['X']+current_coordinates[0]
+                  
+                   
+
+             elif command['X'] is  None and command['Y'] is not None and command['Z'] is None : # Y AXIS
                   
                   if command['Y']>0:
                      reverse(yobj,conversion(abs(command['Y']-current_coordinates[1]))) 
-               
+                     current_coordinates[0]=command['Y']
                   else:
-                     move(yobj,conversion(abs(command['Y']-current_coordinates[1])))
-                     
+                     move(yobj,conversion(abs(command['Y'])))
+                     current_coordinates[0]=command['Y']+current_coordinates[1]
                   
-                  current_coordinates[1]=command['Y']  
+                    
              elif command['X'] is  None and command['Y'] is  None and command['Z'] is not None :
                   
                  if command['Z']>0:
                     pen_up()
                  elif command['Z']<=0:
                     pen_down()   
-print(current_coordinates)                  
+print(current_coordinates)                 
