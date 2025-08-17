@@ -3,10 +3,10 @@ import time
 
 
 # all  the 4 coils of stepper motor A,B,C,D
-a=Pin(19,Pin.OUT)  
-b=Pin(21,Pin.OUT)
-c=Pin(22,Pin.OUT)
-d=Pin(23,Pin.OUT)
+a=Pin(13,Pin.OUT)  
+b=Pin(16,Pin.OUT)
+c=Pin(17,Pin.OUT)
+d=Pin(21,Pin.OUT)
 
 
 # i have noticed one thing that in full step there is less torque that why it stops working when there too much friction between due to bad print quality 

@@ -5,9 +5,9 @@ import math
 # 1 step = 0.01mm
 
 # all the 4 coils of stepper motor A,B,C,D
-a=Pin(19,Pin.OUT)  
-b=Pin(21,Pin.OUT)
-c=Pin(22,Pin.OUT)
+a=Pin(13,Pin.OUT)  
+b=Pin(16,Pin.OUT)
+c=Pin(17,Pin.OUT)
 d=Pin(23,Pin.OUT)
 
 

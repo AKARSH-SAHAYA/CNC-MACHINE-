@@ -1,3 +1,4 @@
+import math
 def bresenham_line(x0, y0, x1, y1):
     points = []
     dx = abs(x1 - x0)
@@ -19,7 +20,5 @@ def bresenham_line(x0, y0, x1, y1):
             y0 += sy
     return points
 
-# Example usage:
-line_points = bresenham_line(0,0, 5,3)
-for pt in line_points:
-    print("Plot:", pt)
+pri=bresenham_line(2.3456,3.1561,6.1232,9.12321)
+print(pri)

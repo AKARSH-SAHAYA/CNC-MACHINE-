@@ -8,9 +8,9 @@ from machine import Pin  #type:ignore
 import time
 
 print("THE PINS USED HERE ARE 19 21 22 23  FOR A,B,C,D COILS RESPECTIVELY")
-a=Pin(19,Pin.OUT)  
-b=Pin(21,Pin.OUT)
-c=Pin(22,Pin.OUT)
+a=Pin(13,Pin.OUT)  
+b=Pin(16,Pin.OUT)
+c=Pin(17,Pin.OUT)
 d=Pin(23,Pin.OUT)
 
 # taking input to know how many times caliberation has to be done 
@@ -41,14 +41,17 @@ forward_sequence = [
 
 
 def reset():                       # to reset the system for next caliberation test 
-   for test in range(50):
-       for step in reversed(forward_sequence):
-           move(step)
+   
+     for test in range(25):
+       for step in forward_sequence:
+           move(step)  
     
 while number_of_test>0:
-    for test in range(50):
-       for step in forward_sequence:
+    
+    for test in range(25):
+     for step in reversed(forward_sequence):
            move(step)
+    
     print("MEASURE THE DISTANCE ")
     time.sleep(10)
     reset()
@@ -57,4 +60,4 @@ while number_of_test>0:
     number_of_test=number_of_test-1
 
 print("THE AVERAGE DISPLACEMENT FOR 1 STEP IS ")
-print((avg/n)/400)                   # if we dont divide it will given the avg of 200 steps not one 25*8 = 200
+print((avg/n)/200)                   # if we dont divide it will given the avg of 200 steps not one 25*8 = 200

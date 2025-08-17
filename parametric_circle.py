@@ -35,21 +35,8 @@ def generate_arc(cx, cy, x0, y0, x1, y1, clockwise=False, step_deg=2):
     # Generate points
     for i in range(steps + 1):
         theta = angle_start + direction * i * step_rad
-        x = round(cx + r * math.cos(theta))
-        y = round(cy + r * math.sin(theta))
+        x = math.ceil(cx + r * math.cos(theta))
+        y = math.ceil(cy + r * math.sin(theta))
         points.append((x, y))
 
     return points
-x0, y0 = 15, 10
-
-# End point
-x1, y1 = 10, 15
-
-# Center of arc
-cx, cy = 10, 10
-
-# G3 → counter-clockwise
-arc_points = generate_arc(cx, cy, x0, y0, x1, y1, clockwise=False)  #G03- FALSE ACW 
-
-for pt in arc_points:
-    print("Plot:", pt)

@@ -1,10 +1,11 @@
 from machine import Pin # type: ignore
 import time
 
+
 # Stepper pin sets for X, Y, Z axes
-x_pins = [4, 5, 18, 19]
-y_pins = [12, 13, 14, 15]
-z_pins = [27, 21, 32, 33]
+x_pins = [13,16,17,23]
+y_pins = [19,21,22,25]
+z_pins = [26,27,32,33]
 
 # Half-step sequence (8 steps per cycle)
 halfstep_sequence = [
@@ -20,7 +21,7 @@ halfstep_sequence = [
 
 def conversion(distance):
     """Convert distance (mm) to steps (assuming 0.01mm/step)."""
-    return int(distance / 0.01)  # Ensure integer steps
+    return round(float(distance / 0.01),3)  # Ensure integer steps
 
 def pins_init(pins):
     """Initialize a list of Pin objects for stepper motor control."""
@@ -69,9 +70,11 @@ def reverse(pin_obj, steps):
 def control_cnc(x_dist, y_dist):
     """Control CNC movement for X and Y axes."""
     try:
+        x_dist=round(float(x_dist),3)
+        y_dist=round(float(y_dist),3)
         x_steps = conversion(abs(x_dist))
         y_steps = conversion(abs(y_dist))
-        max_steps = max(x_steps, y_steps)
+        max_steps = max(x_steps, y_steps,1)
 
         
         x_step_size = x_steps / max_steps  # Steps per iteration
